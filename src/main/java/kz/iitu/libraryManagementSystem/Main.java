@@ -222,8 +222,9 @@ public class Main {
                     }
                     return true;
                 case 3:
+                    in.nextLine();
                     System.out.println("Search: ");
-                    String search = in.next();
+                    String search = in.nextLine();
                     List<Book> results = bookController.search(search);
                     for (Book book: results){
                         System.out.println(book);
