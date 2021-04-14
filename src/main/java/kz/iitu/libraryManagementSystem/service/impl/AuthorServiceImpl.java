@@ -32,7 +32,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void updateAuthor(Author author) {
-//        Author updatedSubscriber = authorRepository.findById(author.getAuthor_id()).get();
         authorRepository.save(author);
     }
 

@@ -1,5 +1,7 @@
 package kz.iitu.libraryManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,8 @@ public class Subscriber {
     private String subscriber_email;
     private String subscriber_password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Author> publishers = new ArrayList<>();
 
     public Subscriber(String subscriber_name, String subscriber_email, String subscriber_password) {

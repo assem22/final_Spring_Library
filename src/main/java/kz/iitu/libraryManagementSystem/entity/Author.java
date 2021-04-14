@@ -1,6 +1,10 @@
 package kz.iitu.libraryManagementSystem.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +20,10 @@ public class Author {
     private String author_email;
     private String author_password;
 
-    @OneToMany(mappedBy="author")
-    private List<Book> books = new ArrayList<>();
+    @OneToMany(mappedBy="author", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Book> books;
 
-    @ManyToMany(mappedBy = "publishers",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "publishers",fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Subscriber> subscribers;
 
     public Author( String author_name, String author_email, String author_password) {

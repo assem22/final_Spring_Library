@@ -1,6 +1,10 @@
 package kz.iitu.libraryManagementSystem.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,19 +17,25 @@ public class Book {
     private String book_genre;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="author_id", nullable=false)
+    @Column(name = "author_id")
+    private Long authorId;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+//    @JoinColumn(name="author_id", nullable=false)
+    @JoinColumn(name = "author_id", insertable = false, updatable = false)
     private Author author;
 
     public Book() {
 
     }
 
-    public Book(String book_name, String book_genre, String description, Author author) {
-        this.book_name = book_name;
-        this.book_genre = book_genre;
-        this.description = description;
-        this.author = author;
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     public Author getAuthor() {

@@ -40,8 +40,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void updateBook(Book book) {
-        Book updatedSubscriber = bookRepository.findById(book.getBook_id()).get();
-        bookRepository.save(updatedSubscriber);
+        bookRepository.save(book);
     }
 
     @Override

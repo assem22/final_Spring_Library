@@ -32,7 +32,6 @@ public class SubscriberServiceImpl implements SubscriberService {
 
     @Override
     public void updateSubscriber(Subscriber subscriber) {
-//        Subscriber updatedSubscriber = subscriberRepository.findById(subscriber.getSubscriber_id()).get();
         subscriberRepository.save(subscriber);
     }
 
