@@ -22,17 +22,30 @@ public class BookController {
         return bookService.findAllBooks();
     }
 
-    @PostMapping("")
+    // add book
+    @GetMapping("/create")
+    public void createUserByUsernamePassword(String book_name,
+                                             String book_genre,
+                                             String description) {
+        Book book = new Book();
+        book.setBook_name(book_name);
+        book.setBook_genre(book_genre);
+        book.setDescription(description);
+
+        bookService.createBook(book);
+    }
+
+    @PostMapping("/newbook")
     public void createBook(@RequestBody Book book) {
         bookService.createBook(book);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public void updateBook(@PathVariable Long id, @RequestBody Book book) {
         book.setBook_id(id);
         bookService.updateBook(book);

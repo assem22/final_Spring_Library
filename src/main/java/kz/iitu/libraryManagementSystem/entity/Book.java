@@ -1,9 +1,7 @@
 package kz.iitu.libraryManagementSystem.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -84,7 +82,7 @@ public class Book {
                 ", book_name='" + book_name + '\'' +
                 ", book_genre='" + book_genre + '\'' +
                 ", description='" + description + '\'' +
-                ", author='" + author.getAuthor_name() + '\'' +
+                ", author='" + author.getName() + '\'' +
                 '}';
     }
 }

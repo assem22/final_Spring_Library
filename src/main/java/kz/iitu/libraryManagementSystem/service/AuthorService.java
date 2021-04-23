@@ -1,6 +1,7 @@
 package kz.iitu.libraryManagementSystem.service;
 
 import kz.iitu.libraryManagementSystem.entity.Author;
+//import kz.iitu.libraryManagementSystem.entity.Subscriber;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,6 @@ public interface AuthorService {
     void updateAuthor(Author author);
 
     void deleteAuthor(Long id);
+
+//    List<Subscriber> findAllFollowers();
 }
