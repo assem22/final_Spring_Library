@@ -3,7 +3,7 @@ package kz.iitu.libraryManagementSystem.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import kz.iitu.libraryManagementSystem.entity.Author;
+import kz.iitu.libraryManagementSystem.entity.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,7 +11,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -33,10 +32,6 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
         // By default, UsernamePasswordAuthenticationFilter listens to "/login" path.
         // In our case, we use "/auth". So, we need to override the defaults.
         this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/auth/**", "POST"));
-//        this.setRequiresAuthenticationRequestMatcher(new OrRequestMatcher(
-//                new AntPathRequestMatcher("/auth/**", "POST")
-//                , new AntPathRequestMatcher("/authors/register", "POST")
-//        ));
     }
 
     @Override
@@ -46,7 +41,7 @@ public class JwtTokenGeneratorFilter extends UsernamePasswordAuthenticationFilte
         try {
 
             // 1. Get credentials from request
-            Author creds = new ObjectMapper().readValue(request.getInputStream(), Author.class);
+            User creds = new ObjectMapper().readValue(request.getInputStream(), User.class);
 
             // 2. Create auth object (contains credentials) which will be used by auth manager
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

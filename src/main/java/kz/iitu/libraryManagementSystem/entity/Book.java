@@ -15,14 +15,14 @@ public class Book {
     private String book_genre;
     private String description;
 
-    @Column(name = "author_id")
+    @Column(name = "user_id")
     private Long authorId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
 //    @JoinColumn(name="author_id", nullable=false)
-    @JoinColumn(name = "author_id", insertable = false, updatable = false)
-    private Author author;
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User author;
 
     public Book() {
 
@@ -36,12 +36,12 @@ public class Book {
         this.authorId = authorId;
     }
 
-    public Author getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setAuthor(User user) {
+        this.author = user;
     }
 
     public Long getBook_id() {

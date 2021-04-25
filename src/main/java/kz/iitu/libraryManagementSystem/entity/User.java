@@ -2,6 +2,7 @@ package kz.iitu.libraryManagementSystem.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,11 +13,11 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "author")
-public class Author implements  UserDetails {
+@Table(name = "users")
+public class User implements  UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
     private String name;
     @Column(unique = true)
     private String username;
@@ -24,7 +25,7 @@ public class Author implements  UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
 
@@ -39,18 +40,18 @@ public class Author implements  UserDetails {
             joinColumns={@JoinColumn(name="user_id")},
             inverseJoinColumns={@JoinColumn(name="parent_id")})
     @JsonIgnore
-    private List<Author> following = new ArrayList<>();
+    private List<User> following = new ArrayList<>();
 
     @ManyToMany(mappedBy = "following")
-    private List<Author> followers = new ArrayList<>();
+    private List<User> followers = new ArrayList<>();
 
-    public Author(String name, String username, String password) {
+    public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
     }
 
-    public Author() {
+    public User() {
     }
 
     public List<Role> getRoles() {
@@ -61,19 +62,19 @@ public class Author implements  UserDetails {
         this.roles = roles;
     }
 
-    public List<Author> getFollowers() {
+    public List<User> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<Author> followers) {
+    public void setFollowers(List<User> followers) {
         this.followers = followers;
     }
 
-    public List<Author> getFollowing() {
+    public List<User> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<Author> following) {
+    public void setFollowing(List<User> following) {
         this.following = following;
     }
 
@@ -85,12 +86,12 @@ public class Author implements  UserDetails {
         this.books = books;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId(Long author_id) {
-        this.id = author_id;
+    public void setUser_id(Long author_id) {
+        this.user_id = author_id;
     }
 
     public String getName() {
@@ -121,7 +122,7 @@ public class Author implements  UserDetails {
     @Override
     public String toString() {
         return "Author{" +
-                "author_id=" + id +
+                "author_id=" + user_id +
                 ", author_name='" + name + '\'' +
                 ", author_email='" + username + '\'' +
                 ", author_password='" + password + '\'' +

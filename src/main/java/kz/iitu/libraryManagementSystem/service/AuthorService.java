@@ -1,19 +1,19 @@
 package kz.iitu.libraryManagementSystem.service;
 
-import kz.iitu.libraryManagementSystem.entity.Author;
+import kz.iitu.libraryManagementSystem.entity.User;
 //import kz.iitu.libraryManagementSystem.entity.Subscriber;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AuthorService {
-    List<Author> findAllAuthors();
+    List<User> findAllAuthors();
 
-    Optional<Author> findAuthorById(Long id);
+    Optional<User> findAuthorById(Long id);
 
-    void createAuthor(Author author);
+    void createAuthor(User user);
 
-    void updateAuthor(Author author);
+    void updateAuthor(User user);
 
     void deleteAuthor(Long id);
 

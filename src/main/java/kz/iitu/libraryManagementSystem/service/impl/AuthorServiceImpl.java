@@ -1,6 +1,6 @@
 package kz.iitu.libraryManagementSystem.service.impl;
 
-import kz.iitu.libraryManagementSystem.entity.Author;
+import kz.iitu.libraryManagementSystem.entity.User;
 //import kz.iitu.libraryManagementSystem.entity.Subscriber;
 import kz.iitu.libraryManagementSystem.repository.AuthorRepository;
 import kz.iitu.libraryManagementSystem.service.AuthorService;
@@ -24,24 +24,24 @@ public class AuthorServiceImpl implements AuthorService, UserDetailsService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public List<Author> findAllAuthors() {
+    public List<User> findAllAuthors() {
         return authorRepository.findAll();
     }
 
     @Override
-    public Optional<Author> findAuthorById(Long id) {
+    public Optional<User> findAuthorById(Long id) {
         return authorRepository.findById(id);
     }
 
     @Override
-    public void createAuthor(Author author) {
-        author.setPassword(passwordEncoder.encode(author.getPassword()));
-        authorRepository.saveAndFlush(author);
+    public void createAuthor(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        authorRepository.saveAndFlush(user);
     }
 
     @Override
-    public void updateAuthor(Author author) {
-        authorRepository.save(author);
+    public void updateAuthor(User user) {
+        authorRepository.save(user);
     }
 
     @Override
@@ -56,10 +56,10 @@ public class AuthorServiceImpl implements AuthorService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Author author = authorRepository.findByUsername(email);
-        if (author == null) {
+        User user = authorRepository.findByUsername(email);
+        if (user == null) {
             throw new UsernameNotFoundException("User: " + email + " not found!");
         }
-        return author;
+        return user;
     }
 }

@@ -23,14 +23,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers("/authors/create").permitAll()
+                .antMatchers("/users/create").permitAll()
                 .antMatchers("/books").permitAll()
                 .antMatchers("/books/create", "/books/update/**", "/books/delete/**", "/books/newbook").hasAuthority("AUTHOR")
                 .anyRequest().authenticated()
                 .and()
-                // What's the authenticationManager()?
-                // An object provided by WebSecurityConfigurerAdapter, used to authenticate the user passing user's credentials
-                // The filter needs this auth manager to authenticate the user.
                 .addFilter(new JwtTokenGeneratorFilter(authenticationManager()))
 
                 // Add a filter to validate the tokens with every request
