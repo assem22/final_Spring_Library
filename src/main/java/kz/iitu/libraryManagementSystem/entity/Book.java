@@ -20,7 +20,6 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
-//    @JoinColumn(name="author_id", nullable=false)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User author;
 
