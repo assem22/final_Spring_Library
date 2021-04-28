@@ -2,10 +2,14 @@ package kz.iitu.libraryManagementSystem.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "books")
 public class Book {
     @Id
@@ -22,57 +26,6 @@ public class Book {
     @JsonIgnore
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User author;
-
-    public Book() {
-
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User user) {
-        this.author = user;
-    }
-
-    public Long getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(Long book_id) {
-        this.book_id = book_id;
-    }
-
-    public String getBook_name() {
-        return book_name;
-    }
-
-    public void setBook_name(String book_name) {
-        this.book_name = book_name;
-    }
-
-    public String getBook_genre() {
-        return book_genre;
-    }
-
-    public void setBook_genre(String book_genre) {
-        this.book_genre = book_genre;
-    }
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @Override
     public String toString() {

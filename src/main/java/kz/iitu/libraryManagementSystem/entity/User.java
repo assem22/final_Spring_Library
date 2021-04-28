@@ -3,6 +3,7 @@ package kz.iitu.libraryManagementSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,10 @@ import java.util.List;
 
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString(exclude = {"books"})
 @Table(name = "users")
 public class User implements  UserDetails {
     @Id
@@ -32,9 +37,6 @@ public class User implements  UserDetails {
     @OneToMany(mappedBy="author", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Book> books;
 
-//    @ManyToMany(mappedBy = "publishers",fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-//    private List<Subscriber> subscribers;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="user_relation",
             joinColumns={@JoinColumn(name="user_id")},
@@ -51,86 +53,20 @@ public class User implements  UserDetails {
         this.password = password;
     }
 
-    public User() {
-    }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public List<User> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
-    }
-
-    public List<User> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(List<User> following) {
-        this.following = following;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long author_id) {
-        this.user_id = author_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String author_name) {
-        this.name = author_name;
-    }
-
-    public void setUsername(String author_email) {
-        this.username = author_email;
-    }
-
-    public void setPassword(String author_password) {
-        this.password = author_password;
-    }
-
-//    public List<Subscriber> getSubscribers() {
-//        return subscribers;
+//    @Override
+//    public String toString() {
+//        return "Author{" +
+//                "author_id=" + user_id +
+//                ", author_name='" + name + '\'' +
+//                ", author_email='" + username + '\'' +
+//                ", author_password='" + password + '\'' +
+//                ", roles=" + roles +
+//                ", followers=" + followers +
+//                ", following=" + following +
+//                '}';
 //    }
-//
-//    public void setSubscribers(List<Subscriber> subscribers) {
-//        this.subscribers = subscribers;
-//    }
-
-
-    @Override
-    public String toString() {
-        return "Author{" +
-                "author_id=" + user_id +
-                ", author_name='" + name + '\'' +
-                ", author_email='" + username + '\'' +
-                ", author_password='" + password + '\'' +
-                ", roles=" + roles +
-                ", followers=" + followers +
-                ", following=" + following +
-                '}';
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,5 +1,6 @@
 package kz.iitu.libraryManagementSystem.controller;
 
+import io.swagger.annotations.Api;
 import kz.iitu.libraryManagementSystem.entity.User;
 //import kz.iitu.libraryManagementSystem.entity.Subscriber;
 import kz.iitu.libraryManagementSystem.service.AuthorService;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@Api(value = "User Controller class", description = "This class allows to interact with User object")
 public class AuthorController {
 
     @Autowired
