@@ -8,8 +8,6 @@ import java.util.List;
 public interface BookService {
     List<Book> findAllBooks();
 
-//    public List<Book> searchBooks(String keyword);
-
     Book findBookById(Long id);
 
     public List<Book> searchBooks(String keyword);

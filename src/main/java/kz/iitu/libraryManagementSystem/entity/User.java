@@ -53,21 +53,6 @@ public class User implements  UserDetails {
         this.password = password;
     }
 
-
-
-//    @Override
-//    public String toString() {
-//        return "Author{" +
-//                "author_id=" + user_id +
-//                ", author_name='" + name + '\'' +
-//                ", author_email='" + username + '\'' +
-//                ", author_password='" + password + '\'' +
-//                ", roles=" + roles +
-//                ", followers=" + followers +
-//                ", following=" + following +
-//                '}';
-//    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

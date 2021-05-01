@@ -27,7 +27,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Library Management System API Documentattion")
-                .description("This project is for demonstration purposes only")
+                .description("Created by Mukhamadi Assem")
                 .version("1.0.0")
                 .build();
     }

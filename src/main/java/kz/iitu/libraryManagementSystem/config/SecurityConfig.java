@@ -27,6 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/register").permitAll()
                 .antMatchers("/books").permitAll()
                 .antMatchers("/books/create", "/books/update/**", "/books/delete/**", "/books/newbook").hasAuthority("AUTHOR")
+                .antMatchers("/roles", "/roles/create", "/roles/update/**", "/roles/delete/**").hasAuthority("AUTHOR")
+                .antMatchers("/roles").hasAuthority("USER")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtTokenGeneratorFilter(authenticationManager()))

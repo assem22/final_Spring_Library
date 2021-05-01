@@ -58,31 +58,3 @@ public class BookController {
         return bookService.findBookById(id);
     }
 }
-
-
-//@Controller
-//public class BookController {
-//
-//    @Autowired
-//    private BookService bookService;
-//
-//    public List<Book> getBooks() {
-//        return bookService.findAllBooks();
-//    }
-//
-//    public void createBook(Book book) {
-//        bookService.createBook(book);
-//    }
-//
-//    public void deleteBook(long bookId) {
-//        bookService.deleteBook(bookId);
-//    }
-//
-//    public void updateBook(Book book) {
-//        bookService.updateBook(book);
-//    }
-//
-//    public List<Book> search(String text){
-//        return bookService.searchBooks(text);
-//    }
-//}

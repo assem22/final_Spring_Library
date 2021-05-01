@@ -50,27 +50,4 @@ public class AuthorController {
         user.setUser_id(id);
         authorService.updateAuthor(user);
     }
-
-//    @GetMapping("/followers")
-//    public List<Subscriber> getSubscribers() {
-//        return authorService.findAllFollowers();
-//    }
 }
-
-//@Controller
-//public class AuthorController {
-//
-//    @Autowired
-//    private AuthorService authorService;
-//    public List<Author> getAuthors() {
-//        return authorService.findAllAuthors();
-//    }
-//
-//    public void createAuthor(Author author) {
-//        authorService.createAuthor(author);
-//    }
-//
-//    public void update(Author author) {
-//        authorService.updateAuthor(author);
-//    }
-//}
