@@ -35,30 +35,36 @@
 
         <!-- Section heading -->
         <h3 class="text-center font-weight-bold text-uppercase pb-2 mb-4"
-            style="margin-top: 100px">Update Author</h3>
+            style="margin-top: 100px">Update User</h3>
         <hr class="w-header my-4">
         <!-- Section description -->
         <h3 class="lead text-center pt-2 mb-5">Welcome!</h3>
 
-        <form class="mb-5 mx-md-5" action="#" th:action="@{/author-update/{id}(id=${author.author_id})}"
-              th:object="${author}" method="post">
+        <form class="mb-5 mx-md-5" action="#" th:action="@{/user-update/{id}(id=${user.user_id})}"
+              th:object="${user}" method="post">
 
             <div class="col-md-4 mb-4" style="margin: auto;">
 
-                <input type="text" th:field="*{author_id}" class="form-control" name="id"  readonly="readonly"
+                <input type="text" th:field="*{user_id}" class="form-control" name="id"  readonly="readonly"
                        placeholder="Author ID"/>
 
             </div>
             <div class="col-md-4 mb-4" style="margin: auto;">
 
-                <input type="text" th:field="*{author_name}" class="form-control" name="name"
+                <input type="text" th:field="*{name}" class="form-control" name="name"
                        placeholder="Author Name"/>
 
             </div>
 
             <div class="col-md-4 mb-4" style="margin: auto;">
 
-                <input type="text" th:field="*{author_email}" name="email" class="form-control" readonly="readonly" required="true"
+                <input type="text" th:field="*{username}" name="email" class="form-control" readonly="readonly" required="true"
+                       placeholder="Author email"/>
+
+            </div>
+            <div class="col-md-4 mb-4 ui-helper-hidden" style="margin: auto;">
+
+                <input type="text" th:field="*{password}" name="password" class="form-control" readonly="readonly" required="true"
                        placeholder="Author email"/>
 
             </div>

@@ -25,12 +25,13 @@ public class AuthorServiceImpl implements AuthorService, UserDetailsService {
 
     @Override
     public List<User> findAllAuthors() {
+//        List<User> authors =
         return authorRepository.findAll();
     }
 
     @Override
-    public Optional<User> findAuthorById(Long id) {
-        return authorRepository.findById(id);
+    public User findAuthorById(Long id) {
+        return authorRepository.findById(id).get();
     }
 
     @Override
