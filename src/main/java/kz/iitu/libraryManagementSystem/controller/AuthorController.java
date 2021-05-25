@@ -5,6 +5,7 @@ import kz.iitu.libraryManagementSystem.entity.User;
 //import kz.iitu.libraryManagementSystem.entity.Subscriber;
 import kz.iitu.libraryManagementSystem.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,12 +14,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/users")
+//@RequestMapping("/")
 @Api(value = "User Controller class", description = "This class allows to interact with User object")
 public class AuthorController {
 
     @Autowired
     private AuthorService authorService;
+
+    @GetMapping("/login")
+    public String showLoginForm(User user) {
+        return "login";
+    }
+
+    @GetMapping("/registration")
+    public String showCreateForm(User user) {
+        return "registration";
+    }
+    @RequestMapping("/add-user")
+    public String addUser(@AuthenticationPrincipal User currentUser, User user, Model model) {
+        if(user.getPassword().length()<2){
+            model.addAttribute("users", authorService.findAllAuthors());
+            model.addAttribute("message", "password");
+            return "registration";
+
+        }
+        if (!authorService.createAuthor(user)) {
+            model.addAttribute("users", authorService.findAllAuthors());
+            model.addAttribute("message", "account");
+            return "registration";
+        }
+
+        if(currentUser == null){
+            return "role";
+        }
+        return "redirect:/index";
+    }
 
     @RequestMapping("/users")
     public String findAllAuthors(Model model) {

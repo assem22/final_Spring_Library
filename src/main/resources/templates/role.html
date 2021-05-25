@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
-
+    <title>role</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
@@ -24,10 +23,32 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
-
 </head>
 <body>
-    <div th:insert="static/header :: header"></div>
+<section class="p-5  text-center"
+         style="background-size: cover; height: 810px">
 
+    <!-- Section heading -->
+    <h3 class="text-center font-weight-bold text-uppercase pb-2 mb-4"
+        style="margin-top: 100px">Role</h3>
+    <hr class="w-header my-4">
+    <!-- Section description -->
+    <h3 class="lead text-center pt-2 mb-5">Select your account role!</h3>
+
+    <form class="mb-5 mx-md-5" th:action="@{/add-user-role}" method="POST">
+
+        <div class="form-group col-md-8">
+            <label class="col-form-label">Author</label>
+            <select th:field ="*{authorId}" class="form-control" >
+                <option th:each="author: ${authors}" th:value="${author.user_id}" th:text = "${author.name}"></option>
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-elegant" type="submit">Sign up</button>
+        </div>
+    </form>
+
+</section>
 </body>
 </html>

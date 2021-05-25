@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 
 <nav th:fragment="header" class="navbar fixed-top navbar-expand-lg" style="background-color: rgb(44,44,44); color: white">
@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link white-text" href="/users" style="color: white">Users
+                <a sec:authorize="isAuthenticated() and hasAuthority('AUTHOR')" class="nav-link white-text" href="/users" style="color: white">Users
                 </a>
             </li>
             <li class="nav-item">
@@ -49,9 +49,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-default"
                      aria-labelledby="navbarDropdownMenuLink-3333">
-                    <a class="dropdown-item" routerLink="basket">Basket</a>
-                    <a class="dropdown-item" routerLink="favorites">Favorite list</a>
-                    <a class="dropdown-item" (click)="logOut()">Log out</a>
+                    <a class="dropdown-item" href="/login">Sign in</a>
+                    <a class="dropdown-item" href="/registration">Sign up</a>
+<!--                    <a class="dropdown-item" (click)="logOut()">Log out</a>-->
                     <!--          <a class="dropdown-item" href="#">liked</a>-->
                 </div>
             </li>

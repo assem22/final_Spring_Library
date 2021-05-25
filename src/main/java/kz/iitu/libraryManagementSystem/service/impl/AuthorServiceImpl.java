@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService, UserDetailsService {
@@ -35,9 +35,20 @@ public class AuthorServiceImpl implements AuthorService, UserDetailsService {
     }
 
     @Override
-    public void createAuthor(User user) {
+    public boolean createAuthor(User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        authorRepository.saveAndFlush(user);
+//        return false;
+
+        User userDb = authorRepository.findByUsername(user.getUsername());
+        if (userDb != null) {
+            return false;
+        }
+//        user.setActive(true);
+//        user.setRoles(Collections.singleton(Role.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        authorRepository.saveAndFlush(user);
+        authorRepository.save(user);
+        return true;
     }
 
     @Override

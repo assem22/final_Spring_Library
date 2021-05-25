@@ -4,14 +4,13 @@ import kz.iitu.libraryManagementSystem.entity.User;
 //import kz.iitu.libraryManagementSystem.entity.Subscriber;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface AuthorService {
     List<User> findAllAuthors();
 
     User findAuthorById(Long id);
 
-    void createAuthor(User user);
+    boolean createAuthor(User user);
 
     void updateAuthor(User user);
 
