@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<nav th:fragment="header" class="navbar fixed-top navbar-expand-lg" style="background-color: rgb(44,44,44); color: white">
+    <a class="navbar-brand">MyBook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link black-text" href="/" style="color: white">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+<!--            <li class="nav-item dropdown black-text">-->
+<!--                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"-->
+<!--                   aria-haspopup="true" aria-expanded="false">Categories-->
+<!--                </a>-->
+<!--                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">-->
+<!--                    <a class="dropdown-item" routerLink="/categories/2/detail/1">Model 3</a>-->
+<!--                    <a class="dropdown-item" routerLink="/categories/2/detail/2">Model S</a>-->
+<!--                    <a class="dropdown-item" routerLink="/categories/2/detail/3">Model X</a>-->
+<!--                </div>-->
+<!--            </li>-->
+            <li class="nav-item">
+                <a class="nav-link black-text" href="/books" style="color: white">Books
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link black-text" href="/authors" style="color: white">Authors
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link black-text" href="/subsribers" style="color: white">Subcribers
+                </a>
+            </li>
+        </ul>
+        <form th:action="@{/searchBook}" class="form-inline my-2 my-lg-0" style="color: white">
+            <input class="form-control mr-sm-2" name= "keyword" id = "keyword" type="text" placeholder="Search" aria-label="Search" th:value="${keyword}">
+            <input class="btn btn-outline-success active my-2 my-sm-0" type="submit" value="Search" />
+        </form>
+        <ul class="navbar-nav ml-auto nav-flex-icons black-text">
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" style="color: white">
+                    {{dateObj | date}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" style="color: white">
+                    |
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" style="color: white">
+                    {{user.name}}
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-3333" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" style="color: white">
+                    <i class="fas fa-user" style="color: white"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                     aria-labelledby="navbarDropdownMenuLink-3333">
+                    <a class="dropdown-item" routerLink="basket">Basket</a>
+                    <a class="dropdown-item" routerLink="favorites">Favorite list</a>
+                    <a class="dropdown-item" (click)="logOut()">Log out</a>
+                    <!--          <a class="dropdown-item" href="#">liked</a>-->
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<!--<nav th:fragment= "header" class="navbar navbar-expand-lg navbar-dark" style="background-color: #3A5A81; color: white;">-->
+<!--    <a class="navbar-brand">Library Management System</a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+
+<!--    <div class="collapse navbar-collapse" id="navbarSupportedContent" >-->
+
+<!--        <ul class="navbar-nav mr-auto" >-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/">Home <span class="sr-only"></span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/books">Books</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/authors">Authors</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/subsribers">Subcribers</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+
+<!--        <form th:action="@{/searchBook}" class="form-inline my-2 my-lg-0">-->
+<!--            <input class="form-control mr-sm-2" name= "keyword" id = "keyword" type="text" placeholder="Search" aria-label="Search" th:value="${keyword}">-->
+<!--            <input class="btn btn-outline-success active my-2 my-sm-0" type="submit" value="Search" />-->
+<!--        </form>-->
+
+<!--    </div>-->
+<!--</nav>-->
+

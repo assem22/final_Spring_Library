@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update Author</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+</head>
+<body>
+    <div th:insert="static/header :: header"></div>
+    <section class="p-5  text-center"
+             style="background-size: cover; height: 810px">
+
+        <!-- Section heading -->
+        <h3 class="text-center font-weight-bold text-uppercase pb-2 mb-4"
+            style="margin-top: 100px">Update Author</h3>
+        <hr class="w-header my-4">
+        <!-- Section description -->
+        <h3 class="lead text-center pt-2 mb-5">Welcome!</h3>
+
+        <form class="mb-5 mx-md-5" action="#" th:action="@{/author-update/{id}(id=${author.author_id})}"
+              th:object="${author}" method="post">
+
+            <div class="col-md-4 mb-4" style="margin: auto;">
+
+                <input type="text" th:field="*{author_id}" class="form-control" name="id"  readonly="readonly"
+                       placeholder="Author ID"/>
+
+            </div>
+            <div class="col-md-4 mb-4" style="margin: auto;">
+
+                <input type="text" th:field="*{author_name}" class="form-control" name="name"
+                       placeholder="Author Name"/>
+
+            </div>
+
+            <div class="col-md-4 mb-4" style="margin: auto;">
+
+                <input type="text" th:field="*{author_email}" name="email" class="form-control" readonly="readonly" required="true"
+                       placeholder="Author email"/>
+
+            </div>
+            <div class="text-center">
+                <input class="btn btn-elegant" value="Update Author"
+                       type="submit" />
+            </div>
+        </form>
+
+    </section>
+    <div th:insert="static/footer :: footer"></div>
+</body>
+</html>
