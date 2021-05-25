@@ -35,6 +35,10 @@
         <h3 class="lead text-center pt-2 mb-5">All authors who are registered</h3>
         <!--/*@thymesVar id="users" type=""*/-->
         <div th:switch="${books}" class="container p-3" style="background-color: white">
+            <p class="my-5">
+                <a href="/new-book" class="btn btn-primary">
+                    <i class="fas fa-user-plus ml-2">  Add Book </i></a>
+            </p>
             <table border="1" class="table align-middle">
                 <tr>
                     <th width="150" scope="col">Name</th>
@@ -48,7 +52,7 @@
                     <td th:text="${book.getBook_genre()}" align="center"></td>
                     <td th:text="${book.getDescription()}" align="center"></td>
                     <td align="center">
-                        <a th:href="@{/update-book/{id}(id=${book.book_id})}">
+                        <a th:href="@{/update/{id}(id=${book.book_id})}">
                             <button type="button" class="btn btn-danger btn-sm px-3"><i class="fas fa-cog"></i></button>
                         </a></td>
                     <td align="center">

@@ -1,10 +1,12 @@
 package kz.iitu.libraryManagementSystem.controller;
 
 import kz.iitu.libraryManagementSystem.entity.Book;
+import kz.iitu.libraryManagementSystem.service.AuthorService;
 import kz.iitu.libraryManagementSystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +14,14 @@ import java.util.List;
 @Controller
 public class BookController {
 
+    private final BookService bookService;
+    private final AuthorService authorService;
+
     @Autowired
-    private BookService bookService;
+    public BookController(BookService bookService, AuthorService authorService) {
+        this.bookService = bookService;
+        this.authorService = authorService;
+    }
 
     @RequestMapping("/books")
     public String findAllBooks(Model model) {
@@ -21,6 +29,52 @@ public class BookController {
 
         model.addAttribute("books", books);
         return "books";
+    }
+
+    @GetMapping("/new-book")
+    public String showCreateForm(Book book, Model model) {
+//        model.addAttribute("categories", categoryService.findAllCategories());
+        model.addAttribute("authors", authorService.findAllAuthors());
+        return "add_book";
+    }
+
+    @RequestMapping("/add-book")
+    public String createBook(Book book, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "add_book";
+        }
+
+        bookService.createBook(book);
+        model.addAttribute("book", bookService.findAllBooks());
+        return "redirect:/books";
+    }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+        final Book book = bookService.findBookById(id);
+
+        model.addAttribute("book", book);
+        return "book_update";
+    }
+
+    @RequestMapping("/book-update/{id}")
+    public String updateBook(@PathVariable("id") Long id, Book book, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            book.setBook_id(id);
+            return "book_update";
+        }
+
+        bookService.updateBook(book);
+        model.addAttribute("book", bookService.findAllBooks());
+        return "redirect:/books";
+    }
+
+    @RequestMapping("/book-delete/{id}")
+    public String deleteBook(@PathVariable("id") Long id, Model model) {
+        bookService.deleteBook(id);
+
+        model.addAttribute("book", bookService.findAllBooks());
+        return "redirect:/books";
     }
 
     @GetMapping("")
