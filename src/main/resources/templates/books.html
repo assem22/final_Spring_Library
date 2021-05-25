@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+</head>
+<body>
+    <div th:insert="static/header :: header"></div>
+    <div align="center" id="edit">
+        <h3 class="text-center font-weight-bold text-uppercase pb-2 mb-4"
+            style="margin-top: 100px">Books</h3>
+        <hr class="w-header my-4">
+        <!-- Section description -->
+        <h3 class="lead text-center pt-2 mb-5">All authors who are registered</h3>
+        <!--/*@thymesVar id="users" type=""*/-->
+        <div th:switch="${books}" class="container p-3" style="background-color: white">
+            <table border="1" class="table align-middle">
+                <tr>
+                    <th width="150" scope="col">Name</th>
+                    <th width="100" scope="col">Genre</th>
+                    <th width="100" scope="col">Description</th>
+                    <th width="80" scope="col">Edit</th>
+                    <th width="80" scope="col">Delete</th>
+                </tr>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.getBook_name()}" align="center"></td>
+                    <td th:text="${book.getBook_genre()}" align="center"></td>
+                    <td th:text="${book.getDescription()}" align="center"></td>
+                    <td align="center">
+                        <a th:href="@{/update-book/{id}(id=${book.book_id})}">
+                            <button type="button" class="btn btn-danger btn-sm px-3"><i class="fas fa-cog"></i></button>
+                        </a></td>
+                    <td align="center">
+                        <a th:href="@{/book-delete/{id}(id=${book.book_id})}">
+                            <button type="button" class="btn btn-danger btn-sm px-3"><i class="fas fa-times"></i></button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

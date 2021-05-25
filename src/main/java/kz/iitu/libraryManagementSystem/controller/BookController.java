@@ -3,16 +3,25 @@ package kz.iitu.libraryManagementSystem.controller;
 import kz.iitu.libraryManagementSystem.entity.Book;
 import kz.iitu.libraryManagementSystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/books")
+@Controller
 public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @RequestMapping("/books")
+    public String findAllBooks(Model model) {
+        final List<Book> books = bookService.findAllBooks();
+
+        model.addAttribute("books", books);
+        return "books";
+    }
 
     @GetMapping("")
     public List<Book> getBooks() {
@@ -21,7 +30,7 @@ public class BookController {
 
     // add book
     @GetMapping("/create")
-    public void createUserByUsernamePassword(String book_name,
+    public void createBookByUsernamePassword(String book_name,
                                              String book_genre,
                                              String description) {
         Book book = new Book();
@@ -54,7 +63,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Book getUserById(@PathVariable("id") Long id) {
+    public Book getBookById(@PathVariable("id") Long id) {
         return bookService.findBookById(id);
     }
 }

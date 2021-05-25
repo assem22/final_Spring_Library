@@ -57,37 +57,37 @@ public class AuthorController {
         return "redirect:/users";
     }
 
-
-    @GetMapping("")
-    public List<User> getAuthors() {
-        return authorService.findAllAuthors();
-    }
+//
+//    @GetMapping("")
+//    public List<User> getAuthors() {
+//        return authorService.findAllAuthors();
+//    }
 
     // add user
-    @GetMapping("/create")
-    public void createUserByUsernamePassword(String name, String username,
-                                             String password) {
-        User user = new User();
-        user.setName(name);
-        user.setPassword(password);
-        user.setUsername(username);
-
-        authorService.createAuthor(user);
-    }
-
-    @PostMapping("/register")
-    public void createAuthor(@RequestBody User user) {
-        authorService.createAuthor(user);
-    }
-
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
-        return authorService.findAuthorById(id);
-    }
-
-    @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody User user) {
-        user.setUser_id(id);
-        authorService.updateAuthor(user);
-    }
+//    @GetMapping("/create")
+//    public void createUserByUsernamePassword(String name, String username,
+//                                             String password) {
+//        User user = new User();
+//        user.setName(name);
+//        user.setPassword(password);
+//        user.setUsername(username);
+//
+//        authorService.createAuthor(user);
+//    }
+//
+//    @PostMapping("/register")
+//    public void createAuthor(@RequestBody User user) {
+//        authorService.createAuthor(user);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public User getUserById(@PathVariable("id") Long id) {
+//        return authorService.findAuthorById(id);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public void update(@PathVariable Long id, @RequestBody User user) {
+//        user.setUser_id(id);
+//        authorService.updateAuthor(user);
+//    }
 }
