@@ -4,6 +4,8 @@ import io.swagger.annotations.Api;
 import kz.iitu.libraryManagementSystem.entity.User;
 //import kz.iitu.libraryManagementSystem.entity.Subscriber;
 import kz.iitu.libraryManagementSystem.service.AuthorService;
+import kz.iitu.libraryManagementSystem.service.BookService;
+import kz.iitu.libraryManagementSystem.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -18,8 +20,14 @@ import java.util.List;
 @Api(value = "User Controller class", description = "This class allows to interact with User object")
 public class AuthorController {
 
+    private final RoleService roleService;
+    private final AuthorService authorService;
+
     @Autowired
-    private AuthorService authorService;
+    public AuthorController(RoleService roleService, AuthorService authorService) {
+        this.roleService = roleService;
+        this.authorService = authorService;
+    }
 
     @GetMapping("/login")
     public String showLoginForm(User user) {
@@ -27,7 +35,8 @@ public class AuthorController {
     }
 
     @GetMapping("/registration")
-    public String showCreateForm(User user) {
+    public String showCreateForm(User user, Model model) {
+        model.addAttribute("roles", roleService.getRoles());
         return "registration";
     }
     @RequestMapping("/add-user")
@@ -45,7 +54,7 @@ public class AuthorController {
         }
 
         if(currentUser == null){
-            return "role";
+            return "login";
         }
         return "redirect:/index";
     }

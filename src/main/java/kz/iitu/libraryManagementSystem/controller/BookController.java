@@ -4,6 +4,7 @@ import kz.iitu.libraryManagementSystem.entity.Book;
 import kz.iitu.libraryManagementSystem.service.AuthorService;
 import kz.iitu.libraryManagementSystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,15 @@ public class BookController {
     public BookController(BookService bookService, AuthorService authorService) {
         this.bookService = bookService;
         this.authorService = authorService;
+    }
+
+    @RequestMapping("/searchBook")
+    public String searchBook(@Param("keyword") String keyword, Model model) {
+        final List<Book> books = bookService.searchBooks(keyword);
+
+        model.addAttribute("books", books);
+        model.addAttribute("keyword", keyword);
+        return "books";
     }
 
     @RequestMapping("/books")
